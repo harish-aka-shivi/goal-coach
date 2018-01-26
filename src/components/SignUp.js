@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import firebaseApp from '../firebase';
 
+import { Link } from 'react-router';
+
+
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -50,7 +53,10 @@ class SignUp extends Component {
               Sign Up
           </button>
 
-          <div >{this.state.error.message}</div>
+          <div style={{margin:'5%'}}>{this.state.error.message}</div>
+
+          <div style={{margin:'5%'}}><Link to={'/signin'}>Already a user? Sign in</Link></div>
+
         </div>
       </div>
     )
