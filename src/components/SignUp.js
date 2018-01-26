@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import firebaseApp from '../firebase';
+import { firebaseApp } from '../firebase';
 
 import { Link } from 'react-router';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import firebaseApp from './firebase';
+import { firebaseApp, goalRef } from './firebase';
 import {Router, Route,browserHistory } from 'react-router';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
