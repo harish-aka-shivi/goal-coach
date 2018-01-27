@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { goalRef } from '../firebase';
 import {connect} from 'react-redux';
 import { setGoals } from '../actions';
+import GoalItem from './GoalItem';
 
 class  GoalList extends Component {
   constructor(props) {
@@ -14,8 +15,10 @@ class  GoalList extends Component {
       let goals = [];
       snap.forEach(goal=> {
         let goalObject = goal.val();
+        console.log('goal in goalList componentDidMount',goal );
+        const serverKey = goal.key;
         const {email,title } = goalObject;
-        goals.push({email,title});
+        goals.push({email,title,serverKey});
       })
       // console.log('goals in goalList componentDidMount',goals);
       this.props.setGoals(goals);
@@ -25,7 +28,14 @@ class  GoalList extends Component {
   render() {
     console.log("goals in reader, this.props.goals", this.props.goals);
     return (
-      <div>GoalList</div>
+      <div> {
+        this.props.goals.map((goal,index)=> {
+          return(
+            <GoalItem  key={index} goal={goal}/>
+          )
+        })
+      }
+      </div>
     )
   }
 }
@@ -37,4 +47,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(null,{setGoals})(GoalList);
+export default connect(mapStateToProps,{setGoals})(GoalList);
