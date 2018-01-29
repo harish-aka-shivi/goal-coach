@@ -14,24 +14,43 @@ class CompleteGoalList extends Component {
       snap.forEach(completeGoal => {
         const {email,title} = completeGoal.val();
         completeGoals.push({email, title});
-        this.props.setCompleted(completeGoals);
       })
+      this.props.setCompleted(completeGoals);
     })
   }
 
+  clearCompleted() {
+    completeGoalRef.set([]);
+  }
+
   render(){
-    console.log('complete goald list , this.props.completeGoals', this.props.completeGoals);
+    console.log('complete goald list , this.props.completeGoals', this.props);
     return(
-      <div>empty</div>
+      <div>
+        {
+        this.props.completeGoals.map((completeGoal,index) => {
+          const {title,email} = completeGoal;
+          return (
+            <div key={index}>
+              <strong>{title}</strong> Completed by <em>{email}</em>
+            </div>
+          )
+        })
+        }
+        <button className="btn btn-primary"
+          onClick={()=> this.clearCompleted()}> Clear All</button>
+      </div>
     )
   }
 }
 
 function mapStateToProps(state) {
   const {completeGoals} = state;
+  console.log("funtion map mapStateToProps in CompleteGoalList, state is => ", state,"completeGoal are", completeGoals);
+
   return {
-    completeGoal,
+    completeGoals
   }
 }
 
-export default connect(mapStateToProps,setCompleted)(CompleteGoalList);
+export default connect(mapStateToProps,{setCompleted})(CompleteGoalList);
